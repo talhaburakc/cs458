@@ -1,0 +1,45 @@
+.our-story-card-background {
+    z-index: 0;
+    position: absolute;
+    top: -70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.concord-img-wrapper {
+    bottom: 0;
+}
+.concord-img-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.concord-img {
+    height: 100%;
+    width: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.concord-img {
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+.concord-img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -webkit-transform: scale(1.25) translateY(-10%);
+    -moz-transform: scale(1.25) translateY(-10%);
+    -ms-transform: scale(1.25) translateY(-10%);
+    -o-transform: scale(1.25) translateY(-10%);
+    transform: scale(1.25) translateY(-10%);
+}
