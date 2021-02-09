@@ -8,7 +8,14 @@ import {useHistory, withRouter} from "react-router-dom";
 class Signup_2 extends React.Component {
     constructor(props) {
         super(props);
-        this.state.email = "";
+
+        this.handleEmailChange = this.handleEmailChange.bind(Signup_2)
+        this.handlePasswordChange = this.handlePasswordChange.bind(Signup_2)
+        this.handleCheckBoxChange = this.handleCheckBoxChange.bind(Signup_2)
+        this.handleContinueClick = this.handleContinueClick.bind(Signup_2)
+
+        this.state = {email: '', checkbox: false, password: ''}
+
     }
 
 
@@ -23,14 +30,9 @@ class Signup_2 extends React.Component {
     }
 
     handleContinueClick = (e) => {
-        // this.setState({password: e.target.value});
         let path = `/sign-up3`;
-        console.log(this.state.email)
-        console.log(this.state.password)
 
-        // const {history} = this.props;
-        //
-        // history.push(path);
+        this.props.history.push(path);
     }
 
     render() {
@@ -53,18 +55,18 @@ class Signup_2 extends React.Component {
                             <br/>
 
                             <Form>
-                                <Form.Group controlId="formBasicEmail">
+                                <Form.Group>
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control type="email" placeholder="Enter email" value={this.state.email}
                                                   onChange={this.handleEmailChange}/>
                                 </Form.Group>
 
-                                <Form.Group controlId="formBasicPassword">
+                                <Form.Group>
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" placeholder="Password" value={this.state.password}
                                                   onChange={this.handlePasswordChange}/>
                                 </Form.Group>
-                                <Form.Group controlId="formBasicCheckbox">
+                                <Form.Group>
                                     <Form.Check type="checkbox" label="Please do not email me Netflix special offers."
                                                 value={this.state.checkbox} onChange={this.handleCheckBoxChange}/>
                                 </Form.Group>
