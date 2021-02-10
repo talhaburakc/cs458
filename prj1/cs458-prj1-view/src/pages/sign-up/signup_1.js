@@ -17,7 +17,7 @@ export default function Signup_1() {
     return (
 
         <div>
-            <Header/>
+            <Header link_text="Sign in"/>
 
             <div className="text-center">
                 <img src="https://assets.nflxext.com/ffe/siteui/acquisition/simplicity/Devices.png" alt="step logo"/>

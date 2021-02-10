@@ -38,7 +38,7 @@ class Signup_2 extends React.Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header link_text="Sign in"/>
 
                 <div style={{marginTop: "15px"}}>
                     <div className="w-25" style={{margin: "auto"}}>

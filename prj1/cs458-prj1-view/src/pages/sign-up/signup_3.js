@@ -2,12 +2,19 @@ import React from 'react';
 import {Button} from 'react-bootstrap'
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import {useHistory} from "react-router-dom";
 
 export default function Signup_3() {
+    const history = useHistory()
+
+    const handleClick = () => {
+        history.push('/sign-up4');
+    }
+
 
     return (
         <div style={{textAlign: "center"}}>
-            <Header/>
+            <Header link_text="Sign out"/>
             <div className="planContainer">
                 <div style={{marginTop: "125px"}}>
                     <img src="https://assets.nflxext.com/ffe/siteui/acquisition/simplicity/Checkmark.png" alt="logo"
@@ -15,7 +22,7 @@ export default function Signup_3() {
                     />
                 </div>
                 <div style={{marginTop: "25px"}}>
-                    <span>STEP 1 OF 3</span>
+                    <span>STEP 2 OF 3</span>
                     <h3>Choose your plan</h3>
                 </div>
                 <div style={{marginTop: "25px", textAlign: "center"}}>
@@ -26,7 +33,7 @@ export default function Signup_3() {
                     </ul>
                 </div>
                 <div style={{marginTop:"25px"}}>
-                    <Button variant="danger" style={{width: "25%"}}>See the plans</Button>
+                    <Button variant="danger" style={{width: "25%"}} onClick={handleClick}>See the plans</Button>
                 </div>
 
             </div>

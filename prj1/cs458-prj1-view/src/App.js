@@ -13,6 +13,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Signup_4 from "./pages/sign-up/signup_4";
+import Signup_5 from "./pages/sign-up/signup_5";
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
           <Route path="/sign-in">
             <SignIn />
           </Route>
-          <Route path="/sign-up">
+          <Route path="/sign-up1">
             <Signup_1 />
           </Route>
           <Route path="/sign-up2">
@@ -33,6 +35,12 @@ function App() {
           </Route>
           <Route path="/sign-up3">
             <Signup_3 />
+          </Route>
+          <Route path="/sign-up4">
+            <Signup_4 />
+          </Route>
+          <Route path="/sign-up5">
+            <Signup_5 />
           </Route>
         </Switch>
 
