@@ -14,16 +14,18 @@ class Signup_2 extends React.Component {
         this.handleCheckBoxChange = this.handleCheckBoxChange.bind(Signup_2)
         this.handleContinueClick = this.handleContinueClick.bind(Signup_2)
 
-        this.state = {email: '', checkbox: false, password: ''}
+        this.state = {email: '', checkbox: false, password: '', invalidEmail: false, invalidPassword: false}
 
     }
 
 
-    handleEmailChange = (e) => {
-        this.setState({email: e.target.value});
+    handleEmailChange = (email) => {
+        this.setState({invalidEmail: false});
+        this.setState({email: email.target.value});
     }
     handlePasswordChange = (e) => {
         this.setState({password: e.target.value});
+        this.setState({invalidPassword: false});
     }
     handleCheckBoxChange = (e) => {
         this.setState({checkbox: e.target.value});
@@ -32,7 +34,20 @@ class Signup_2 extends React.Component {
     handleContinueClick = (e) => {
         let path = `/sign-up3`;
 
-        this.props.history.push(path);
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (re.test(this.state.email) && this.state.password.length > 0) {
+            this.props.history.push(path);
+        }
+        else {
+            if (!re.test(this.state.email)) {
+                this.setState({invalidEmail: true})
+            }
+            if (this.state.password.trim() === "") {
+                this.setState({invalidPassword: true})
+            }
+            e.preventDefault();
+        }
     }
 
     render() {
@@ -56,21 +71,34 @@ class Signup_2 extends React.Component {
 
                             <Form>
                                 <Form.Group>
-                                    <Form.Label>Email address</Form.Label>
                                     <Form.Control type="email" placeholder="Enter email" value={this.state.email}
                                                   onChange={this.handleEmailChange}/>
+                                    {
+                                        this.state.invalidEmail &&
+                                        <span style={{color: "orange", fontSize: "1em"}}>
+                                        This email is invalid
+                                            </span>
+                                    }
+
                                 </Form.Group>
 
                                 <Form.Group>
-                                    <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" placeholder="Password" value={this.state.password}
                                                   onChange={this.handlePasswordChange}/>
+                                    {
+                                        this.state.invalidPassword &&
+                                        <span style={{color: "orange", fontSize: "1em"}}>
+                                        Password can not be empty
+                                            </span>
+                                    }
+
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Check type="checkbox" label="Please do not email me Netflix special offers."
                                                 value={this.state.checkbox} onChange={this.handleCheckBoxChange}/>
                                 </Form.Group>
-                                <Button variant="danger" type="submit" className="w-100" onClick={this.handleContinueClick}>
+                                <Button variant="danger" type="submit" className="w-100"
+                                        onClick={this.handleContinueClick}>
                                     Continue
                                 </Button>
                             </Form>

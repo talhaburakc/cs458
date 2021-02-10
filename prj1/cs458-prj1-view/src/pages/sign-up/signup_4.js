@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, ButtonGroup} from 'react-bootstrap'
+import {Button, ButtonGroup, Form} from 'react-bootstrap'
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import {withRouter} from "react-router-dom";
@@ -9,16 +9,22 @@ class Signup_4 extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {plan: ""}
+        this.state = {plan: "", notChosen: false}
     }
 
-    handleContinueClick = () => {
-        let path = `/sign-up5`;
-
-        this.props.history.push(path);
+    handleContinueClick = (event) => {
+        if(this.state.plan.trim() === ""){
+            this.setState({notChosen: true});
+            event.preventDefault();
+        }
+        else {
+            let path = `/sign-up5`;
+            this.props.history.push(path);
+        }
     }
 
     handleChoiceClick = (event) => {
+        this.setState({notChosen: false});
         this.setState({
             plan: event.target.innerHTML
         })
@@ -61,6 +67,13 @@ class Signup_4 extends React.Component {
 
                         </ButtonGroup>
                     </div>
+                    {
+                        this.state.notChosen &&
+                        <span style={{color: "orange", fontSize: "1em", marginLeft: "250px"}}>
+                                        One of the options need to be chosen!
+                                            </span>
+                    }
+
                     <div style={{marginTop: "25px"}}>
                         <Button variant="danger" style={{width: "375px", marginLeft: "250px"}}
                                 onClick={this.handleContinueClick}>Continue</Button>
