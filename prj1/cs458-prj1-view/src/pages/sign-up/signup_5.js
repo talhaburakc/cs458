@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/Header";
-import {Button, ButtonGroup} from "react-bootstrap";
+import {Button, ButtonGroup, Form} from "react-bootstrap";
 import Footer from "../../components/Footer";
 import {withRouter} from "react-router-dom";
 
@@ -11,10 +11,10 @@ class Signup_5 extends React.Component {
         super(props);
     }
 
-    handleClick = () => {
-        // let path = `/sign-up5`;
+    handleDoneClick = () => {
+        let path = `/success`;
 
-        // this.props.history.push(path);
+        this.props.history.push(path);
     }
 
 
@@ -44,6 +44,11 @@ class Signup_5 extends React.Component {
                         <br/>
                         <a href="#">Gift Code</a>
                     </div>
+
+                    <Button style={{marginTop: "20px"}} variant="danger"
+                            onClick={this.handleDoneClick}>
+                        Done
+                    </Button>
                 </div>
 
                 <Footer/>

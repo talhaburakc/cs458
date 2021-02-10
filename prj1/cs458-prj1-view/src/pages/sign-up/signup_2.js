@@ -16,12 +16,12 @@ class Signup_2 extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleEmailChange = this.handleEmailChange.bind(Signup_2)
-        this.handlePasswordChange = this.handlePasswordChange.bind(Signup_2)
-        this.handleCheckBoxChange = this.handleCheckBoxChange.bind(Signup_2)
-        this.handleContinueClick = this.handleContinueClick.bind(Signup_2)
-
-        this.state = {email: '', checkbox: false, password: '', invalidEmail: false, invalidPassword: false}
+        this.state = {
+            email: this.props.currentUserEmail || '',
+            checkbox: false, password: '',
+            invalidEmail: false,
+            invalidPassword: false
+        }
     }
 
 
@@ -44,8 +44,7 @@ class Signup_2 extends React.Component {
         if (re.test(this.state.email) && this.state.password.trim() !== "") {
             this.props.addUser(new User(this.state.email, this.state.password));
             this.props.history.push(`/sign-up3`);
-        }
-        else {
+        } else {
             if (re.test(this.state.email) === false) {
                 this.setState({invalidEmail: true})
             }

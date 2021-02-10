@@ -8,6 +8,7 @@ import Signup_2 from './pages/sign-up/signup_2';
 import Signup_3 from './pages/sign-up/signup_3';
 import Signup_4 from "./pages/sign-up/signup_4";
 import Signup_5 from "./pages/sign-up/signup_5";
+import Success from "./pages/final_page/success";
 import React from 'react';
 
 
@@ -25,10 +26,22 @@ class User {
     }
 }
 
-class App extends React.Component{
+class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {users: [new User("elif@gmail.com", "elif"), new User("irem@gmail.com", "irem")]};
+        this.state = {
+            users: [new User("elif@gmail.com", "elif"), new User("irem@gmail.com", "irem")],
+            currentUserEmail: "",
+            currentUserPassword: ""
+        };
+    }
+
+    updateCurrentUserEmail = (email) => {
+        this.setState({currentUserEmail: email})
+    }
+
+    updateCurrentUserPassword = (password) => {
+        this.setState({currentUserPassword: password});
     }
 
     addUser = (newUser) => {
@@ -36,12 +49,12 @@ class App extends React.Component{
         let userExists = false;
 
         users.forEach((user) => {
-            if(user.email === newUser.email){
+            if (user.email === newUser.email) {
                 userExists = true;
             }
         })
 
-        if(!userExists){
+        if (!userExists) {
             users.push(newUser);
             this.setState({users: users});
         }
@@ -53,16 +66,22 @@ class App extends React.Component{
                 <div>
                     <Switch>
                         <Route exact path="/">
-                            <Home/>
+                            <Home updateCurrentUserEmail = {this.updateCurrentUserEmail}/>
                         </Route>
                         <Route path="/sign-in">
-                            <SignIn/>
+                            <SignIn users={this.state.users}/>
+                        </Route>
+                        <Route path="/success">
+                            <Success/>
                         </Route>
                         <Route path="/sign-up1">
                             <Signup_1/>
                         </Route>
                         <Route path="/sign-up2">
-                            <Signup_2 users={this.state.users} addUser={this.addUser}/>
+                            <Signup_2 users={this.state.users}
+                                      addUser={this.addUser}
+                                      currentUserEmail = {this.state.currentUserEmail}
+                            />
                         </Route>
                         <Route path="/sign-up3">
                             <Signup_3 users={this.state.users}/>
