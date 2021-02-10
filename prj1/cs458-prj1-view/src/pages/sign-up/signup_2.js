@@ -5,6 +5,13 @@ import Footer from "../../components/Footer";
 import {useHistory, withRouter} from "react-router-dom";
 
 
+class User {
+    constructor(email, password) {
+        this.email = email;
+        this.password = password;
+    }
+}
+
 class Signup_2 extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +22,6 @@ class Signup_2 extends React.Component {
         this.handleContinueClick = this.handleContinueClick.bind(Signup_2)
 
         this.state = {email: '', checkbox: false, password: '', invalidEmail: false, invalidPassword: false}
-
     }
 
 
@@ -32,21 +38,20 @@ class Signup_2 extends React.Component {
     }
 
     handleContinueClick = (e) => {
-        let path = `/sign-up3`;
-
+        e.preventDefault();
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        if (re.test(this.state.email) && this.state.password.length > 0) {
-            this.props.history.push(path);
+        if (re.test(this.state.email) && this.state.password.trim() !== "") {
+            this.props.addUser(new User(this.state.email, this.state.password));
+            this.props.history.push(`/sign-up3`);
         }
         else {
-            if (!re.test(this.state.email)) {
+            if (re.test(this.state.email) === false) {
                 this.setState({invalidEmail: true})
             }
             if (this.state.password.trim() === "") {
                 this.setState({invalidPassword: true})
             }
-            e.preventDefault();
         }
     }
 
