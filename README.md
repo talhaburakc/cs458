@@ -1,14 +1,15 @@
 
 # cs458
 
-## Run the app
+## Project 1
+### Run the app
 ```
 cd prj1/cs458-prj1-view
 npm install
 npm start
 ```
 
-## Pre-saved users:
+### Pre-saved users:
 ```
 [
   {
