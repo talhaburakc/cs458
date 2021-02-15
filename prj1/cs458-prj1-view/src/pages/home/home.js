@@ -61,7 +61,7 @@ class Home extends React.Component {
                     <div style={{width: "25%", margin: "auto"}}>
                         <Form>
                             <Form.Group>
-                                <Form.Control type="email" placeholder="Enter email" value={this.state.email}
+                                <Form.Control type="email" placeholder="Enter email" value={this.state.email} id="enter_email_input"
                                               onChange={this.handleEmailChange}/>
                                 {
                                     this.state.invalidEmail &&
@@ -72,7 +72,7 @@ class Home extends React.Component {
 
                             </Form.Group>
                             <Form.Group>
-                                <Button variant="danger" type="submit" className="w-100"
+                                <Button variant="danger" type="submit" className="w-100" id="get_started_button"
                                         onClick={this.handleContinueClick}>
                                     Get Started
                                 </Button>

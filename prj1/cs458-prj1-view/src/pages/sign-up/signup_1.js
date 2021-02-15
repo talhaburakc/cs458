@@ -30,7 +30,7 @@ class Signup_1 extends React.Component {
                         <p>Netflix is personalized for you. Create a password to watch Netflix on any device at any
                             time.</p>
                     </div>
-                    <Button onClick={this.routeChange} variant="danger">Continue</Button>
+                    <Button onClick={this.routeChange} variant="danger" id="continue_button">Continue</Button>
 
                 </div>
 

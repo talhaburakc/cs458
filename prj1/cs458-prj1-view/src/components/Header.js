@@ -10,10 +10,10 @@ class Header extends React.Component {
     render() {
         return (
             <Navbar className="static-top justify-content-between border-bottom" style={{height: "100px"}}>
-                <Link to="/" id="link">
+                <Link to="/" id="home_link">
                     <Image src="netflix_logo.png"/>
                 </Link>
-                <Link to="/sign-in" style={{color: " black"}}>{this.props.link_text}</Link>
+                <Link to="/sign-in" style={{color: " black"}} id="signin_link">{this.props.link_text}</Link>
             </Navbar>
         );
     }

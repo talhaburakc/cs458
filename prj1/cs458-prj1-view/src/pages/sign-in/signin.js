@@ -88,7 +88,7 @@ class Signin extends React.Component {
                             <Form>
                                 <Form.Group>
                                     <Form.Label>{this.state.isInputEmail ? "Email address" : "Phone number"}</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email or phone number" value={this.state.email}
+                                    <Form.Control type="email" placeholder="Enter email or phone number" value={this.state.email} id="enter_email_phone_input"
                                                   onChange={this.handleEmailChange}/>
                                     {
                                         this.state.invalidEmail &&
@@ -106,7 +106,7 @@ class Signin extends React.Component {
 
                                 <Form.Group>
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" value={this.state.password}
+                                    <Form.Control type="password" placeholder="Password" value={this.state.password} id="enter_password_input"
                                                   onChange={this.handlePasswordChange}/>
                                     {
                                         this.state.invalidPassword &&
@@ -116,7 +116,7 @@ class Signin extends React.Component {
                                     }
 
                                 </Form.Group>
-                                <Button variant="danger" type="submit" className="w-100"
+                                <Button variant="danger" type="submit" className="w-100" id="continue_button"
                                         onClick={this.handleContinueClick}>
                                     Continue
                                 </Button>

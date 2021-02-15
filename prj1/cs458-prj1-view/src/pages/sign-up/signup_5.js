@@ -46,7 +46,7 @@ class Signup_5 extends React.Component {
                         <a href="#">Gift Code</a>
                     </div>
 
-                    <Button style={{marginTop: "20px"}} variant="danger"
+                    <Button style={{marginTop: "20px"}} variant="danger" id="done_button"
                             onClick={this.handleDoneClick}>
                         Done
                     </Button>

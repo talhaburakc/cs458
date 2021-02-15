@@ -42,7 +42,7 @@ class Signup_3 extends React.Component {
                         </ul>
                     </div>
                     <div style={{marginTop: "25px"}}>
-                        <Button variant="danger" style={{width: "25%"}} onClick={this.handleClick}>See the plans</Button>
+                        <Button variant="danger" style={{width: "25%"}} onClick={this.handleClick} id="seeplans_button">See the plans</Button>
                     </div>
 
                 </div>

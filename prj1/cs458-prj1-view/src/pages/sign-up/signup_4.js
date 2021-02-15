@@ -52,19 +52,19 @@ class Signup_4 extends React.Component {
                     <div className="choices" style={{marginLeft: "250px"}}>
                         <ButtonGroup style={{height: "100px", width: "210px"}}>
                             <div id="basic_button">
-                                <Button variant="danger" style={{marginRight: "25px", padding: "25px"}}
+                                <Button variant="danger" style={{marginRight: "25px", padding: "25px"}} id="premium_basic"
                                         onClick={this.handleChoiceClick}>Basic</Button>
                                 <span>17.99 TL</span>
                             </div>
 
                             <div id="standard_button">
-                                <Button variant="danger" style={{marginRight: "25px", padding: "25px"}}
+                                <Button variant="danger" style={{marginRight: "25px", padding: "25px"}} id="premium_standard"
                                         onClick={this.handleChoiceClick}>Standard</Button>
                                 <span>29.99 TL</span>
                             </div>
 
                             <div>
-                                <Button variant="danger" style={{padding: "25px"}}
+                                <Button variant="danger" style={{padding: "25px"}} id="premium_button"
                                         onClick={this.handleChoiceClick}>Premium</Button>
                                 <span>41.99 TL</span>
                             </div>
@@ -80,7 +80,7 @@ class Signup_4 extends React.Component {
 
                     <div style={{marginTop: "25px"}}>
                         <Button variant="danger" style={{width: "375px", marginLeft: "250px"}}
-                                onClick={this.handleContinueClick}>Continue</Button>
+                                onClick={this.handleContinueClick} id="continue_button">Continue</Button>
                     </div>
 
                     <Footer/>

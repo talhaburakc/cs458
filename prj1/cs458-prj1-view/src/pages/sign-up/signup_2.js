@@ -76,7 +76,7 @@ class Signup_2 extends React.Component {
 
                             <Form>
                                 <Form.Group>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.email}
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.email} id="email_input"
                                                   onChange={this.handleEmailChange}/>
                                     {
                                         this.state.invalidEmail &&
@@ -88,7 +88,7 @@ class Signup_2 extends React.Component {
                                 </Form.Group>
 
                                 <Form.Group>
-                                    <Form.Control type="password" placeholder="Password" value={this.state.password}
+                                    <Form.Control type="password" placeholder="Password" value={this.state.password} id="password_input"
                                                   onChange={this.handlePasswordChange}/>
                                     {
                                         this.state.invalidPassword &&
@@ -99,10 +99,10 @@ class Signup_2 extends React.Component {
 
                                 </Form.Group>
                                 <Form.Group>
-                                    <Form.Check type="checkbox" label="Please do not email me Netflix special offers."
+                                    <Form.Check type="checkbox" label="Please do not email me Netflix special offers." id="notify_checkbox"
                                                 value={this.state.checkbox} onChange={this.handleCheckBoxChange}/>
                                 </Form.Group>
-                                <Button variant="danger" type="submit" className="w-100"
+                                <Button variant="danger" type="submit" className="w-100" id="continue_button"
                                         onClick={this.handleContinueClick}>
                                     Continue
                                 </Button>
