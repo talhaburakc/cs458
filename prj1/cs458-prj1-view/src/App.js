@@ -20,9 +20,10 @@ import {
 } from "react-router-dom";
 
 class User {
-    constructor(email, password) {
+    constructor(email, password, phoneNumber) {
         this.email = email;
         this.password = password;
+        this.phoneNumber = phoneNumber;
     }
 }
 
@@ -30,7 +31,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [new User("elif@gmail.com", "elif"), new User("irem@gmail.com", "irem")],
+            users: [new User("elif@gmail.com", "elif"), new User("irem@gmail.com", "irem"), new User("talha@gmail.com", "talha", "+90 542 761 8930")],
             currentUserEmail: "",
             currentUserPassword: ""
         };

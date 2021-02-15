@@ -14,14 +14,20 @@ class Signin extends React.Component {
             checkbox: false,
             password: '',
             invalidEmail: false,
+            invalidPhoneNumber: false,
             invalidPassword: false,
-            invalidUser: false
+            invalidUser: false,
+            isInputEmail: true,
         }
     }
 
     handleEmailChange = (email) => {
-        this.setState({invalidEmail: false});
-        this.setState({email: email.target.value});
+        this.setState({
+            invalidEmail: false,
+            invalidPhoneNumber: false,
+            email: email.target.value,
+            isInputEmail: !(email.target.value.length > 0 && (email.target.value.charAt(0) == "+" || (email.target.value.charAt(0) >= '0' && email.target.value.charAt(0) <= '9'))),
+        });
     }
     handlePasswordChange = (e) => {
         this.setState({invalidPassword: false});
@@ -32,13 +38,13 @@ class Signin extends React.Component {
         this.setState({invalidUser: false})
 
         e.preventDefault();
-        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        if (re.test(this.state.email) && this.state.password.trim() !== "") {
+        let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let phoneNumberRegex = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+        if ((this.state.isInputEmail && emailRegex.test(this.state.email) || (!this.state.isInputEmail && phoneNumberRegex.test(this.state.email))) && this.state.password.trim() !== "") {
             let userExists = false;
 
             this.props.users.forEach((user) => {
-                if (user.email === this.state.email && user.password === this.state.password) {
+                if ((user.email === this.state.email && user.password === this.state.password) || (user.phoneNumber === this.state.email && user.password === this.state.password)) {
                     userExists = true;
                 }
             })
@@ -50,8 +56,11 @@ class Signin extends React.Component {
             }
 
         } else {
-            if (re.test(this.state.email) === false) {
+            if (this.state.isInputEmail && emailRegex.test(this.state.email) === false) {
                 this.setState({invalidEmail: true})
+            }
+            if (!this.state.isInputEmail && phoneNumberRegex.test(this.state.email) === false) {
+                this.setState({invalidPhoneNumber: true})
             }
             if (this.state.password.trim() === "") {
                 this.setState({invalidPassword: true})
@@ -77,18 +86,25 @@ class Signin extends React.Component {
 
                             <Form>
                                 <Form.Group>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.email}
+                                    <Form.Label>{this.state.isInputEmail ? "Email address" : "Phone number"}</Form.Label>
+                                    <Form.Control type="email" placeholder="Enter email or phone number" value={this.state.email}
                                                   onChange={this.handleEmailChange}/>
                                     {
                                         this.state.invalidEmail &&
                                         <span style={{color: "orange", fontSize: "1em"}}>
-                                        This email is invalid
-                                            </span>
+                                            This email is invalid
+                                        </span>
                                     }
-
+                                    {
+                                        this.state.invalidPhoneNumber &&
+                                        <span style={{color: "orange", fontSize: "1em"}}>
+                                            This phone number is invalid
+                                        </span>
+                                    }
                                 </Form.Group>
 
                                 <Form.Group>
+                                    <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" placeholder="Password" value={this.state.password}
                                                   onChange={this.handlePasswordChange}/>
                                     {
