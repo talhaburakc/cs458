@@ -9,12 +9,13 @@ class Signup_5 extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props.users);
     }
 
     handleDoneClick = () => {
-        let path = `/success`;
-
-        this.props.history.push(path);
+        const user = this.props.location.data;
+        user.setSignUpStep(10);
+        this.props.history.push("/success");
     }
 
 

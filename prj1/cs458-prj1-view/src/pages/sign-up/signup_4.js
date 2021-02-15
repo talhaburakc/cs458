@@ -8,7 +8,7 @@ class Signup_4 extends React.Component {
 
     constructor(props) {
         super(props);
-
+        console.log(props.users);
         this.state = {plan: "", notChosen: false}
     }
 
@@ -18,8 +18,12 @@ class Signup_4 extends React.Component {
             event.preventDefault();
         }
         else {
-            let path = `/sign-up5`;
-            this.props.history.push(path);
+            const user = this.props.location.data;
+            user.setSignUpStep(5);
+            this.props.history.push({
+                pathname: "/sign-up5",
+                data: user
+            });
         }
     }
 

@@ -8,12 +8,16 @@ class Signup_3 extends React.Component {
 
     constructor(props){
         super(props);
-
-        console.log(this.props.users);
+        console.log(props.users);
     }
 
     handleClick = () => {
-        this.props.history.push('/sign-up4');
+        const user = this.props.location.data;
+        user.setSignUpStep(4);
+        this.props.history.push({
+            pathname: "/sign-up4",
+            data: user
+        });
     }
 
     render() {

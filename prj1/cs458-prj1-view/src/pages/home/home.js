@@ -27,15 +27,26 @@ class Home extends React.Component {
         }
 
         let accountExists = false;
-        this.props.users.forEach((user) => {
-            if (user.email === this.state.email) {
+        let user = null;
+        this.props.users.forEach((u) => {
+            if (u.email === this.state.email) {
                 accountExists = true;
+                user = u;
             }
         })
 
         this.props.updateCurrentUserEmail(this.state.email);
         if (accountExists) {
-            this.props.history.push('sign-in');
+            console.log("userstate: ", user.signUpStep);
+            console.log("users: ", this.props.users);
+            if (user.signUpStep >= 3 && user.signUpStep <= 5) {
+                this.props.history.push({
+                    pathname: `/sign-up${user.signUpStep}`,
+                    data: user
+                });
+            } else {
+                this.props.history.push('sign-in');
+            }
         } else {
             this.props.history.push('sign-up1');
         }

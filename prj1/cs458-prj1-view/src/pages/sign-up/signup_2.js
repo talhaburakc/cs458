@@ -3,14 +3,8 @@ import {Button, Form} from 'react-bootstrap'
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import {useHistory, withRouter} from "react-router-dom";
+import User from '../../models/User';
 
-
-class User {
-    constructor(email, password) {
-        this.email = email;
-        this.password = password;
-    }
-}
 
 class Signup_2 extends React.Component {
     constructor(props) {
@@ -22,6 +16,8 @@ class Signup_2 extends React.Component {
             invalidEmail: false,
             invalidPassword: false
         }
+
+        console.log(props.users);
     }
 
 
@@ -41,9 +37,14 @@ class Signup_2 extends React.Component {
         e.preventDefault();
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+        let user = new User(this.state.email, this.state.password);
+        user.setSignUpStep(3);
         if (re.test(this.state.email) && this.state.password.trim() !== "") {
-            this.props.addUser(new User(this.state.email, this.state.password));
-            this.props.history.push(`/sign-up3`);
+            this.props.addUser(user);
+            this.props.history.push({
+                pathname: "/sign-up3",
+                data: user
+            });
         } else {
             if (re.test(this.state.email) === false) {
                 this.setState({invalidEmail: true})

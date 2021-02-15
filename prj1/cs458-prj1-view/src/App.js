@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import User from './models/User';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/home/home';
@@ -19,14 +19,6 @@ import {
     Link
 } from "react-router-dom";
 
-class User {
-    constructor(email, password, phoneNumber) {
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-    }
-}
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -35,6 +27,7 @@ class App extends React.Component {
             currentUserEmail: "",
             currentUserPassword: ""
         };
+        console.log(this.state.users);
     }
 
     updateCurrentUserEmail = (email) => {
