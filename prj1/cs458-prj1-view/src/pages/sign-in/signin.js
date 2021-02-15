@@ -10,7 +10,7 @@ class Signin extends React.Component {
         super(props);
 
         this.state = {
-            email: '',
+            email: props.currentUserEmail || '',
             checkbox: false,
             password: '',
             invalidEmail: false,
@@ -26,6 +26,7 @@ class Signin extends React.Component {
             invalidEmail: false,
             invalidPhoneNumber: false,
             email: email.target.value,
+            // !(if the first character of input is either '+' or a digit)
             isInputEmail: !(email.target.value.length > 0 && (email.target.value.charAt(0) == "+" || (email.target.value.charAt(0) >= '0' && email.target.value.charAt(0) <= '9'))),
         });
     }

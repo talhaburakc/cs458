@@ -21,13 +21,23 @@ class Home extends React.Component {
         e.preventDefault();
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        if (re.test(this.state.email)) {
-            this.props.updateCurrentUserEmail(this.state.email)
-            this.props.history.push('sign-up1')
-        } else {
-            if (re.test(this.state.email) === false) {
-                this.setState({invalidEmail: true})
+        if (!re.test(this.state.email)) {
+            this.setState({invalidEmail: true});
+            return;
+        }
+
+        let accountExists = false;
+        this.props.users.forEach((user) => {
+            if (user.email === this.state.email) {
+                accountExists = true;
             }
+        })
+
+        this.props.updateCurrentUserEmail(this.state.email);
+        if (accountExists) {
+            this.props.history.push('sign-in');
+        } else {
+            this.props.history.push('sign-up1');
         }
     }
 

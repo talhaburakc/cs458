@@ -67,10 +67,10 @@ class App extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/">
-                            <Home updateCurrentUserEmail = {this.updateCurrentUserEmail}/>
+                            <Home users={this.state.users} updateCurrentUserEmail={this.updateCurrentUserEmail}/>
                         </Route>
                         <Route path="/sign-in">
-                            <SignIn users={this.state.users}/>
+                            <SignIn users={this.state.users} currentUserEmail = {this.state.currentUserEmail}/>
                         </Route>
                         <Route path="/success">
                             <Success/>
