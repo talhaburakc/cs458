@@ -17,17 +17,19 @@ class Signin extends React.Component {
             invalidPhoneNumber: false,
             invalidPassword: false,
             invalidUser: false,
-            isInputEmail: true,
+            isInputEmail: false,
+            isEmptyPhoneNumberOrEmail: false
         }
     }
 
-    handleEmailChange = (email) => {
+    handleEmailChange = (input) => {
         this.setState({
             invalidEmail: false,
             invalidPhoneNumber: false,
-            email: email.target.value,
+            email: input.target.value,
             // !(if the first character of input is either '+' or a digit)
-            isInputEmail: !(email.target.value.length > 0 && (email.target.value.charAt(0) == "+" || (email.target.value.charAt(0) >= '0' && email.target.value.charAt(0) <= '9'))),
+            isInputEmail: !((input.target.value.charAt(0) === "+" || (input.target.value.charAt(0) >= '0' && input.target.value.charAt(0) <= '9'))),
+            isEmptyPhoneNumberOrEmail: (input.target.value.trim().length === 0)
         });
     }
     handlePasswordChange = (e) => {
@@ -39,8 +41,10 @@ class Signin extends React.Component {
         this.setState({invalidUser: false})
 
         e.preventDefault();
+
         let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let phoneNumberRegex = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+
         if ((this.state.isInputEmail && emailRegex.test(this.state.email) || (!this.state.isInputEmail && phoneNumberRegex.test(this.state.email))) && this.state.password.trim() !== "") {
             let userExists = false;
 
@@ -57,12 +61,16 @@ class Signin extends React.Component {
             }
 
         } else {
-            if (this.state.isInputEmail && emailRegex.test(this.state.email) === false) {
+            if (this.state.isInputEmail && emailRegex.test(this.state.email) === false && this.state.email.trim().length !== 0) {
                 this.setState({invalidEmail: true})
             }
-            if (!this.state.isInputEmail && phoneNumberRegex.test(this.state.email) === false) {
+            if (!this.state.isInputEmail && phoneNumberRegex.test(this.state.email) === false && this.state.email.trim().length !== 0) {
                 this.setState({invalidPhoneNumber: true})
             }
+            if (!this.state.isInputEmail && this.state.email.trim().length === 0) {
+                this.setState({isEmptyPhoneNumberOrEmail: true})
+            }
+
             if (this.state.password.trim() === "") {
                 this.setState({invalidPassword: true})
             }
@@ -81,37 +89,47 @@ class Signin extends React.Component {
                             {
                                 this.state.invalidUser &&
                                 <span style={{color: "orange", fontSize: "1em"}}>
-                                        Sorry, we can't find your account. Please consider Signing Up.
+                                        Sorry, something went wrong. Please try again later.
                                             </span>
                             }
 
                             <Form>
                                 <Form.Group>
-                                    <Form.Label>{this.state.isInputEmail ? "Email address" : "Phone number"}</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email or phone number" value={this.state.email} id="enter_email_phone_input"
+                                    <Form.Control type="email" placeholder="Enter email or phone number"
+                                                  value={this.state.email} id="enter_email_phone_input"
                                                   onChange={this.handleEmailChange}/>
+
+
+                                    {
+                                        this.state.isEmptyPhoneNumberOrEmail &&
+                                        <span style={{color: "orange", fontSize: "1em"}}>
+                                            Please enter a valid email or phone number.
+                                        </span>
+                                    }
                                     {
                                         this.state.invalidEmail &&
                                         <span style={{color: "orange", fontSize: "1em"}}>
                                             This email is invalid
                                         </span>
                                     }
+
                                     {
                                         this.state.invalidPhoneNumber &&
                                         <span style={{color: "orange", fontSize: "1em"}}>
                                             This phone number is invalid
                                         </span>
                                     }
+
                                 </Form.Group>
 
                                 <Form.Group>
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" value={this.state.password} id="enter_password_input"
+                                    <Form.Control type="password" placeholder="Password" value={this.state.password}
+                                                  id="enter_password_input"
                                                   onChange={this.handlePasswordChange}/>
                                     {
                                         this.state.invalidPassword &&
                                         <span style={{color: "orange", fontSize: "1em"}}>
-                                        Password can not be empty
+                                        Your password must contain between 4 and 60 characters.
                                             </span>
                                     }
 

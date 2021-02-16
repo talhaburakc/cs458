@@ -66,7 +66,7 @@ class Home extends React.Component {
                                 {
                                     this.state.invalidEmail &&
                                     <span style={{color: "orange", fontSize: "1em"}}>
-                                        This email is invalid
+                                        Please enter a valid email address
                                             </span>
                                 }
 
