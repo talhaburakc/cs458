@@ -17,6 +17,8 @@ class Signin extends React.Component {
             invalidPhoneNumber: false,
             invalidPassword: false,
             invalidUser: false,
+            accDoesntExist: false,
+            accExistsButPasswordDoesntMatch: false,
             isInputEmail: false,
             isEmptyPhoneNumberOrEmail: false
         }
@@ -47,17 +49,23 @@ class Signin extends React.Component {
 
         if ((this.state.isInputEmail && emailRegex.test(this.state.email) || (!this.state.isInputEmail && phoneNumberRegex.test(this.state.email))) && this.state.password.trim() !== "") {
             let userExists = false;
-
+            let accExistsButDoesntMatch = false;
             this.props.users.forEach((user) => {
                 if ((user.email === this.state.email && user.password === this.state.password) || (user.phoneNumber === this.state.email && user.password === this.state.password)) {
                     userExists = true;
+                } else if ((user.email === this.state.email) || (user.phoneNumber === this.state.email)) {
+                    accExistsButDoesntMatch = true;
                 }
             })
 
             if (userExists) {
                 this.props.history.push("/success")
             } else {
-                this.setState({invalidUser: true})
+                if (accExistsButDoesntMatch) {
+                    this.setState({accExistsButPasswordDoesntMatch: true, accDoesntExist: false});
+                } else {
+                    this.setState({accExistsButPasswordDoesntMatch: false, accDoesntExist: true});
+                }
             }
 
         } else {
@@ -87,12 +95,21 @@ class Signin extends React.Component {
                         <div>
                             <h1>Sign in</h1>
                             {
-                                this.state.invalidUser &&
+                                (this.state.accDoesntExist) &&
                                 <span style={{color: "orange", fontSize: "1em"}}>
-                                        Sorry, something went wrong. Please try again later.
-                                            </span>
-                            }
+                                    Sorry, we can't find an account with this email address. Please try again or create a new account
+                                </span>
 
+
+                            }
+                            {
+                                (this.state.accExistsButPasswordDoesntMatch) &&
+                                <span style={{color: "orange", fontSize: "1em"}}>
+                                    Incorrect password. Please try again or you can reset your password.
+                                </span>
+
+
+                            }
                             <Form>
                                 <Form.Group>
                                     <Form.Control type="email" placeholder="Enter email or phone number"
