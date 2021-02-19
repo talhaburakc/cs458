@@ -4,7 +4,7 @@
 ## Project 1
 ### Run the app
 ```
-cd prj1/cs458-prj1-view
+cd cs458-prj1-view
 npm install
 npm start
 ```
