@@ -19,6 +19,11 @@ npm start
   {
     email: irem@gmail.com
     password: irem
+  },
+  {
+    email: talha@gmail.com
+    password: talha
+    phone: +90 542 761 8930
   }
 ]
 ```
