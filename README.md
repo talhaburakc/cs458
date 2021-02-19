@@ -5,12 +5,16 @@
 ### Pre Requisites
 ```
 pip install selenium
+```
 
 
+### Important Note 
+```
+Executable chrome driver file in the prj1/cs458-prj1-test is compatible with MacOS.
 
-!!!important note!!! : executable chrome driver file in the prj1/cs458-prj1-test is compatible with MacOS.
 If you want to test with another operating system, replace executable file by using following link 
     https://chromedriver.storage.googleapis.com/index.html?path=2.35/
+    
 Also check the following line in the test.py file
     driver = webdriver.Chrome(os.path.abspath(os.curdir)+'/chromedriver',options=chrome_options)
 
