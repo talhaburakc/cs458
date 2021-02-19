@@ -1,6 +1,11 @@
 # cs458
 
 ## Project 1
+### Pre Requisites
+```
+Source code is in the prj1/cs458-prj1-view
+test code is in the  prj1/cs458-prj1-test
+```
 
 ### Pre Requisites
 ```
